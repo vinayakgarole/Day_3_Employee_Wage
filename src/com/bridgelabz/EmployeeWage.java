@@ -2,36 +2,50 @@ package com.bridgelabz;
 
 public class EmployeeWage {
 
-    public static void main(String[] args) {
+    static final int FullTIME = 1;
+    static final int PartTime = 2;
+    static final int WagePerHour = 20;
+    static final int WorkingDayPerMonth = 20;
+    static final int TotalWorkHours = 100;
 
-        System.out.println("Welcome to Employee Wage Computation Program");
-        int wagePerHour = 20;
-        int fullTimeHour = 8;
-        int partTimeHour = 4;
-        int totalWorkingDays = 0;
-        int totalHour = 0;
-        int totalDailyWage = 0;
+    /*
+     * Creating calculate wage method
+     */
+    static void calculateWage() {
 
-        while (totalHour < 80 && totalWorkingDays < 20) {
-            int employeeCheck = (int) (Math.random() * ((2 + 0) + 1));
-            totalWorkingDays++;
+        int empHrs;
+        int totalHours = 0;
+        int dailyWage;
+        int day = 0;
+        int totalWage = 0;
 
-            switch (employeeCheck) {
-                case 2:
-                    totalHour = totalHour + fullTimeHour;
-                    totalDailyWage = totalDailyWage + fullTimeHour * wagePerHour;
-                    System.out.println("Employee is present full time: " + totalDailyWage);
+        while ((totalHours < TotalWorkHours) && (day < WorkingDayPerMonth)) {
+            int attendance = (int) (Math.floor(Math.random() * 10)) % 3;
+
+            switch (attendance) {
+                case FullTIME:
+                    empHrs = 8;
                     break;
-                case 1:
-                    totalHour = totalHour + partTimeHour;
-                    totalDailyWage = totalDailyWage + partTimeHour * wagePerHour;
-                    System.out.println("Employee is present half time: " + totalDailyWage);
+                case PartTime:
+                    empHrs = 4;
                     break;
                 default:
-                    System.out.println("Employee is absent: " + totalDailyWage);
+                    empHrs = 0;
+                    break;
             }
-            System.out.println("Working Days is: " + totalWorkingDays + " Hours: " + totalHour);
+            totalHours = totalHours + empHrs;
+            dailyWage = WagePerHour * empHrs;
+            totalWage = totalWage + dailyWage;
+            day++;
+            System.out.println("Day " + day + " Emp work hour " + empHrs + " wage is " + dailyWage);
         }
-        System.out.println("Employee total wage for month is: " + totalDailyWage);
+        System.out.println("Total work hours is: " + totalHours);
+        System.out.println("Total work days are: " + day);
+        System.out.println("Total wage is: " + totalWage);
+    }
+
+    public static void main(String[] args) {
+
+        calculateWage();
     }
 }
