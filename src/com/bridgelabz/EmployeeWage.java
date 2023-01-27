@@ -4,14 +4,11 @@ public class EmployeeWage {
 
     static final int FullTIME = 1;
     static final int PartTime = 2;
-    static final int WagePerHour = 20;
-    static final int WorkingDayPerMonth = 20;
-    static final int TotalWorkHours = 100;
 
     /*
      * Creating calculate wage method
      */
-    static void calculateWage() {
+    static void calculateWage(String company, int wagePerHour, int dayPerMonth, int workHourPerMonth) {
 
         int empHrs;
         int totalHours = 0;
@@ -19,7 +16,7 @@ public class EmployeeWage {
         int day = 0;
         int totalWage = 0;
 
-        while ((totalHours < TotalWorkHours) && (day < WorkingDayPerMonth)) {
+        while ((totalHours < workHourPerMonth) && (day < dayPerMonth)) {
             int attendance = (int) (Math.floor(Math.random() * 10)) % 3;
 
             switch (attendance) {
@@ -34,18 +31,22 @@ public class EmployeeWage {
                     break;
             }
             totalHours = totalHours + empHrs;
-            dailyWage = WagePerHour * empHrs;
+            dailyWage = wagePerHour * empHrs;
             totalWage = totalWage + dailyWage;
             day++;
             System.out.println("Day " + day + " Emp work hour " + empHrs + " wage is " + dailyWage);
         }
         System.out.println("Total work hours is: " + totalHours);
         System.out.println("Total work days are: " + day);
-        System.out.println("Total wage is: " + totalWage);
+        System.out.println("Total wage of company " + company + " is " + totalWage);
     }
 
     public static void main(String[] args) {
 
-        calculateWage();
+        calculateWage("Tata", 10, 20, 100);
+        System.out.println("--------------------------------");
+        calculateWage("Reliance", 20, 22, 90);
+        System.out.println("--------------------------------");
+        calculateWage("Mahindra", 15, 24, 95);
     }
 }
